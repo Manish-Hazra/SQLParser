@@ -6,6 +6,8 @@ using namespace std;
 
 int dfa=0;
 string key[]={"select","delete","insert","value","into","from","where","order","group","by"};
+string tokens[1000];
+int total=0;
 
 void start(char c){
     int check=((int)c);
@@ -172,15 +174,51 @@ string generate_lex(string input){
             if(flag==1){
                 result+=sub;
                 result+=c;
+                if(isspace(c)){
+                    tokens[total]=sub;
+                    total+=1;
+                }
+                else{
+                    string te="";
+                    te+=c;
+                    tokens[total]=sub;
+                    total+=1;
+                    tokens[total]=te;
+                    total+=1;
+                }
             }
             else{
                 if(is_num(sub)){
                         result+="num";
                         result+=c;
+                        if(isspace(c)){
+                    tokens[total]="num";
+                    total+=1;
+                }
+                else{
+                    string te="";
+                    te+=c;
+                    tokens[total]="num";
+                    total+=1;
+                    tokens[total]=te;
+                    total+=1;
+                }
                     }
                     else{
                         result+="id";
                         result+=c;
+                        if(isspace(c)){
+                    tokens[total]="id";
+                    total+=1;
+                }
+                else{
+                    string te="";
+                    te+=c;
+                    tokens[total]="id";
+                    total+=1;
+                    tokens[total]=te;
+                    total+=1;
+                }
                     }
             }
         }
@@ -188,6 +226,10 @@ string generate_lex(string input){
             if(input[i-1]=='>'||input[i-1]=='<'){
                 result+=c;
                 start=i+1;
+                string te="";
+                te+=c;
+                tokens[total-1]=input[i-1]+te;
+                total+=1;
             }
             else{
                 end=i-start;
@@ -202,15 +244,34 @@ string generate_lex(string input){
                 }
                 if(flag==1){
                     result+=sub;
+                    result+=c;
+                    string te="";
+                    te+=c;
+                    tokens[total]=sub;
+                    total+=1;
+                    tokens[total]=te;
+                    total+=1;
                 }
                 else{
                     if(is_num(sub)){
                         result+="num";
                         result+=c;
+                        string te="";
+                        te+=c;
+                        tokens[total]="num";
+                    total+=1;
+                        tokens[total]=te;
+                    total+=1;
                     }
                     else{
                         result+="id";
                         result+=c;
+                        string te="";
+                        te+=c;
+                        tokens[total]="id";
+                    total+=1;
+                        tokens[total]=te;
+                    total+=1;
                     }
                 }
                 start=i+1;
@@ -232,6 +293,11 @@ int main()
     }
     else{
         cout<<"\nNot Accepted";
+    }
+    cout<<"\n"<<total;
+    for(int i=0;i<total;i++){
+        cout<<"\n";
+        cout<<">>"<<tokens[i];
     }
     return 0;
 }
