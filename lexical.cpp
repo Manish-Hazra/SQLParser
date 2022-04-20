@@ -121,7 +121,7 @@ int SymbolTable::hashf(string id)
 
 //....Global Variables Declaration..........//
 int dfa=0;
-string key[]={"select","delete","insert","value","into","from","where","order","group","by"};
+string key[]={"select","delete","insert","values","into","from","where","order","group","by"};
 string tokens[1000];
 SymTab::SymbolTable st;
 int total=0;
@@ -143,22 +143,22 @@ void start(char c){
 void state1(char c){
     int check=((int)c);
     if((check>=65&&check<=90)||(check>=97&&check<=122)){
-        dfa=1;
+        dfa=1;//alphabet->repeat same state
     }
     else if(check>=48&&check<=57){
-        dfa=1;
+        dfa=1;//number->repeat same state
     }
     else if(c==','){
-        dfa=1;
+        dfa=1;//comma->repeat same state
     }
     else if(isspace(c)){
-        dfa=3;
+        dfa=3;//transition to state 3 if space found
     }
     else if(c=='>'||c=='<'||c=='='){
-        dfa=5;
+        dfa=5;//state for relational operator
     }
     else if(c==';'){
-        dfa=6;
+        dfa=6;//final state
     }
     else{
         dfa=-1;

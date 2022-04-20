@@ -1,5 +1,5 @@
 S -> select C from T W G O ; 
-S -> insert into T ( COL ) values ( COLN ) ; 
+S -> insert into T COL values COLN ; 
 S -> delete from T W ; 
 C -> * 
 C -> COL 

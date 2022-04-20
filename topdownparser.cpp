@@ -360,6 +360,7 @@ void build(string str){
 }
 
 //Utility function to perform all required tasks//
+//do_non_terminal_terminal_first_follow()//
 void do_nt_t_f_f(){
     int nt=0;
    int prst[19];
@@ -367,13 +368,13 @@ void do_nt_t_f_f(){
        cout<<"\n"<<prods[i];
        prst[i]=identify_nt(prods[i]);
    }
-   cout<<"\n\nTerminals";
+   cout<<"\n\nNon-Terminals";
    for(int i=0;i<9;i++) cout<<"\n"<<non_terminals[i];
    for(int i=0;i<19;i++){
        prodtokens[i].tot=0;
        identify_t(prods[i],prst[i], i);
    }
-   cout<<"\n\nNon-Terminals";
+   cout<<"\n\nTerminals";
    for(int i=0;i<19;i++) cout<<"\n"<<terminals[i];
    for(int i=0;i<9;i++){
        first[i].term=non_terminals[i];
@@ -393,7 +394,7 @@ void do_nt_t_f_f(){
 
 //Function to print first and follow set//
 void print_f_f(){
-    cout<<"\n\nNon-Terminals\tFirst\t\tFollow";
+    cout<<"\n\nNon-Terminals\tFirst\t\t\t\tFollow";
    for(int i=0;i<9;i++){
        int total=first[i].tot;
        int totalf=follow[i].tot;
@@ -516,7 +517,6 @@ int main(){
        input.push((temp.pop()));
    }while(!temp.isEmpty());
     if(parse()){
-        cout<<"\nString Parsed";
     }
     cout<<"\nProductions Used(in the order):";
     for(int i=0;i<tot_pr;i++){
