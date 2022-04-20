@@ -1,0 +1,19 @@
+S -> select C from T W G O ; 
+S -> insert into T ( COL ) values ( COLN ) ; 
+S -> delete from T W ; 
+C -> * 
+C -> COL 
+T -> id 
+W -> where id relop EXP ; 
+W -> '' 
+G -> group by COL ; 
+G -> '' 
+O -> order by COL ; 
+O -> '' 
+COL -> id, COL 
+COL -> id 
+COLN -> id, COLN 
+COLN -> num, COLN 
+COLN -> EXP 
+EXP -> id 
+EXP -> num 
